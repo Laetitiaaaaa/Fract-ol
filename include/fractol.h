@@ -6,12 +6,22 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/06 17:33:24 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/08 20:45:50 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
+# define ESC 53
+# define PLUS 69
+# define MINUS 78
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
+# define M 46 
+# define J 38
+# define B 11
 
 # include <mlx.h>
 # include <math.h>
@@ -47,6 +57,8 @@ typedef struct		s_first
 	float			tmp;
 	float			scalex;
 	float			scaley;
+	float			movex;
+	float			movey;
 }					t_first;
 
 void				ft_fill_pixel(t_first *m, int x, int y, int n);
@@ -54,5 +66,7 @@ void				ft_nb_color(t_first *m, int blue, int green, int red);
 void				ft_color(int n, t_first *m);
 void				ft_mandel(t_first *m);
 int					ft_key(int key, t_first *m);
+int					ft_mouse_clic(int button, int x, int y, t_first *m);
+int					ft_mouse_move(int x, int y, t_first *m);
 
 #endif

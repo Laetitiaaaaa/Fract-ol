@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:55:17 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/06 20:30:39 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/08 20:40:27 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	ft_julia(t_first *m)
 	int		n;
 
 	m->y = 0;
-	m->nmax = 150;
+	m->nmax = 200;
 	m->xmin = -1.6;
 	m->xmax = 1.6;
 	m->ymin = -1.2;
@@ -104,8 +104,8 @@ void	ft_julia(t_first *m)
 		m->x = 0;
 		while (m->x < m->width)
 		{
-			m->cr = 0.285;
-			m->ci = 0.01;
+			m->cr = m->movex;
+			m->ci = m->movey;
 			m->zr = m->x / m->scalex + m->xmin;
 			m->zi = m->y / m->scaley + m->ymin;
 			n = 0;
@@ -128,7 +128,7 @@ void	ft_burn(t_first *m)
 	int		n;
 
 	m->y = 0;
-	m->nmax = 1000;
+	m->nmax = 100;
 	m->xmin = -3;
 	m->xmax = 2;
 	m->ymin = -3;
@@ -161,8 +161,27 @@ void	ft_burn(t_first *m)
 
 int		ft_key(int key, t_first *m)
 {
-	(key == 53) ? exit(0) : 0;
+	(key == ESC) ? exit(0) : 0;
+	printf("key = %d\n", key);
 	(void)m;
+	return (0);
+}
+
+int		ft_mouse_clic(int button, int x, int y, t_first *m)
+{
+	(void)button;
+	(void)m;
+	(void)x;
+	(void)y;
+	return (0);
+}
+
+int		ft_mouse_move(int x, int y, t_first *m)
+{
+	m->movex = x / m->scalex + m->xmin;
+	m->movey = y / m->scaley + m->ymin;
+	ft_julia(m);
+	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->img_ptr, 0, 0);
 	return (0);
 }
 
@@ -171,8 +190,10 @@ int		main(int ac, char **av)
 	t_first m;
 
 	ac = 2;
-	m.width = 800;
-	m.height = 600;
+	m.width = 400;
+	m.height = 300;
+	m.movex = -0.4;
+	m.movey = 0.6;
 	m.mlx_ptr = mlx_init();
 	m.win_ptr = mlx_new_window(m.mlx_ptr, m.width, m.height, "Fract'ol");
 	m.img_ptr = mlx_new_image(m.mlx_ptr, m.width, m.height);
@@ -185,6 +206,8 @@ int		main(int ac, char **av)
 		ft_burn(&m);
 	mlx_put_image_to_window(m.mlx_ptr, m.win_ptr, m.img_ptr, 0, 0);
 	mlx_hook(m.win_ptr, 2, 0, ft_key, &m);
+	mlx_hook(m.win_ptr, 4, 0, ft_mouse_clic, &m);
+	mlx_hook(m.win_ptr, 6, 0, ft_mouse_move, &m);
 	mlx_loop(m.mlx_ptr);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/08 20:45:50 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/09 15:02:12 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # define M 46 
 # define J 38
 # define B 11
+# define T 17
+# define S 1
+# define CL 33
+# define CR 30
 
 # include <mlx.h>
 # include <math.h>
@@ -59,6 +63,11 @@ typedef struct		s_first
 	float			scaley;
 	float			movex;
 	float			movey;
+	int				val1;
+	float			clicx;
+	float			clicy;
+	int				num;
+	int				clic;
 }					t_first;
 
 void				ft_fill_pixel(t_first *m, int x, int y, int n);
@@ -68,5 +77,8 @@ void				ft_mandel(t_first *m);
 int					ft_key(int key, t_first *m);
 int					ft_mouse_clic(int button, int x, int y, t_first *m);
 int					ft_mouse_move(int x, int y, t_first *m);
+void				ft_display(t_first *m);
+void				ft_tricorn(t_first *m);
+void				ft_sofia(t_first *m);
 
 #endif

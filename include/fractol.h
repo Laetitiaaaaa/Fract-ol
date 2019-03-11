@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/11 10:28:12 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/11 17:12:59 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define B 11
 # define T 17
 # define S 1
+# define D 2
+# define L 37
+# define I 34
 # define CL 33
 # define CR 30
 
@@ -75,18 +78,26 @@ typedef struct		s_first
 	int				clic;
 	int				a;
 	int				b;
+	int				offx;
+	int				offy;
 }					t_first;
 
 void				ft_fill_pixel(t_first *m, int x, int y, int n);
 void				ft_nb_color(t_first *m, int blue, int green, int red);
 void				ft_color(int n, t_first *m);
 void				ft_mandel(t_first *m);
+void				ft_julia(t_first *m);
+void				ft_burn(t_first *m);
 int					ft_key(int key, t_first *m);
 int					ft_mouse_clic(int button, int x, int y, t_first *m);
 int					ft_mouse_move(int x, int y, t_first *m);
 void				ft_display(t_first *m);
 void				ft_tricorn(t_first *m);
-void				ft_sofia(t_first *m);
+void				ft_jerome(t_first *m);
 void				ft_zoom(t_first *m, int x, int y);
+void				ft_lapinou(t_first *m);
+void				ft_illuminati(t_first *m);
+void				ft_sofiya(t_first *m);
+void				ft_translation(t_first *m);
 
 #endif

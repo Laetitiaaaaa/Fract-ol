@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:55:17 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/11 10:53:54 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/11 17:14:21 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_fill_pixel(t_first *m, int x, int y, int n)
 
 	ft_color(n, m);
 	pixel = 4 * (x + (m->width) * y);
-	if (x < m->width && x >= 0 && y < m->height && y >= 0 && pixel < (4 * m->width * m->height) && pixel >= 0)
+	if (x < m->width && x >= 0 && y < m->height && y >= 0
+			&& pixel < (4 * m->width * m->height) && pixel >= 0)
 	{
 		((unsigned char *)m->str)[pixel] = m->blue;
 		((unsigned char *)m->str)[pixel + 1] = m->green;
@@ -46,7 +47,8 @@ void	ft_color(int n, t_first *m)
 	if (m->val > 120 && m->val <= 240)
 		ft_nb_color(m, (m->val - 120) * 255 / 120, 255 - m->blue, 0);
 	if (m->val > 240 && m->val < 360)
-		ft_nb_color(m, 255 - ((m->val - 240) * 255 / 120), 0, (m->val - 240) * 255 / 120);
+		ft_nb_color(m, 255 - ((m->val - 240) * 255 / 120), 0,
+				(m->val - 240) * 255 / 120);
 	if (m->val == 360)
 	{
 		m->blue = 0;
@@ -63,7 +65,7 @@ void	ft_zoom(t_first *m, int x, int y)
 		m->ymin += (y - m->ymin) / 10;
 		m->xmax -= (m->xmax - x) / 10;
 		m->ymax -= (m->ymax - y) / 10;
-		m->nmax += 10;
+//		m->nmax++;
 	}
 	else if (m->a == -1)
 	{
@@ -71,7 +73,7 @@ void	ft_zoom(t_first *m, int x, int y)
 		m->ymin -= (y - m->ymin) / 10;
 		m->xmax += (m->xmax - x) / 10;
 		m->ymax += (m->ymax - y) / 10;
-		m->nmax -= 10;
+//		m->nmax--;
 	}
 	else if (m->a == 0)
 	{
@@ -79,7 +81,9 @@ void	ft_zoom(t_first *m, int x, int y)
 		m->ymin = m->ya;
 		m->xmax = m->xb;
 		m->ymax = m->yb;
-		m->nmax = m->na;
+		m->offx = 0;
+		m->offy = 0;
+//		m->nmax = m->na;
 	}
 }
 
@@ -207,7 +211,7 @@ void	ft_burn(t_first *m)
 	}
 }
 
-void	ft_sofia(t_first *m)
+void	ft_sofiya(t_first *m)
 {
 	int		n;
 
@@ -219,10 +223,10 @@ void	ft_sofia(t_first *m)
 		m->x = 0;
 		while (m->x < m->width)
 		{
-			m->cr = m->movex;
-			m->ci = m->movey;
 			m->zr = m->x / m->scalex + m->xmin;
 			m->zi = m->y / m->scaley + m->ymin;
+			m->cr = m->movex;
+			m->ci = m->movey;
 			n = 0;
 			while ((m->zr * m->zr + m->zi * m->zi) < 4 && n < m->nmax)
 			{
@@ -238,6 +242,107 @@ void	ft_sofia(t_first *m)
 	}
 }
 
+void	ft_jerome(t_first *m)
+{
+	int		n;
+
+	m->y = 0;
+	m->scalex = m->width / (m->xmax - m->xmin);
+	m->scaley = m->height / (m->ymax - m->ymin);
+	while (m->y < m->height)
+	{
+		m->x = 0;
+		while (m->x < m->width)
+		{
+			m->cr = (m->movex);
+			m->ci = (m->movey);
+			m->zr = (m->x / m->scalex + m->xmin);
+			m->zi = (m->y / m->scaley + m->ymin);
+			n = 0;
+			while ((m->zr * m->zr + m->zi * m->zi) < 4 && n < m->nmax)
+			{
+				m->tmp = log((m->zr * m->zr - m->zi * m->zi + m->cr) * 1.5);
+				m->zi = ((2 * m->zr * m->zi) + m->ci);
+				m->zr = (m->tmp);
+				n++;
+			}
+			ft_fill_pixel(m, m->x, m->y, n);
+			m->x++;
+		}
+		m->y++;
+	}
+}
+
+void	ft_lapinou(t_first *m)
+{
+	int		n;
+
+	m->y = 0;
+	m->scalex = m->width / (m->xmax - m->xmin);
+	m->scaley = m->height / (m->ymax - m->ymin);
+	while (m->y < m->height)
+	{
+		m->x = 0;
+		while (m->x < m->width)
+		{
+			m->cr = (m->movex);
+			m->ci = (m->movey);
+			m->zr = (m->x / m->scalex + m->xmin);
+			m->zi = (m->y / m->scaley + m->ymin);
+			n = 0;
+			while ((m->zr * m->zr + m->zi * m->zi) < 4 && n < m->nmax)
+			{
+				m->tmp = (-sin(((m->zr * m->zr - m->zi * m->zi + m->cr) * 1.5) * 360 / 180)) * log(m->cr);
+				m->zi = ((2 * m->zr * m->zi) + m->ci);
+				m->zr = (m->tmp);
+				n++;
+			}
+			ft_fill_pixel(m, m->x, m->y, n);
+			m->x++;
+		}
+		m->y++;
+	}
+}
+
+void	ft_illuminati(t_first *m)
+{
+	int		n;
+
+	m->y = 0;
+	m->scalex = m->width / (m->xmax - m->xmin);
+	m->scaley = m->height / (m->ymax - m->ymin);
+	while (m->y < m->height)
+	{
+		m->x = 0;
+		while (m->x < m->width)
+		{
+			m->cr = (m->movex);
+			m->ci = (m->movey);
+			m->zr = ((m->x / m->scalex + m->xmin) * (m->x / m->scalex + m->xmin));
+			m->zi = (m->y / m->scaley + m->ymin);
+			n = 0;
+			while ((m->zr * m->zr + m->zi * m->zi) < 4 && n < m->nmax)
+			{
+				m->tmp = sin(sqrt(m->zr * m->zr - m->zi * m->zi + m->cr) * 360 /180);
+				m->zi = ((2 * m->zr * m->zi) + m->ci);
+				m->zr = (m->tmp);
+				n++;
+			}
+			ft_fill_pixel(m, m->x, m->y, n);
+			m->x++;
+		}
+		m->y++;
+	}
+}
+
+void	ft_translation(t_first *m)
+{
+	m->xmin += m->offx;
+	m->xmax += m->offx;
+	m->ymin += m->offy;
+	m->ymax += m->offy;
+}
+
 int		ft_key(int key, t_first *m)
 {
 	(key == ESC) ? exit(0) : 0;
@@ -246,8 +351,15 @@ int		ft_key(int key, t_first *m)
 	(key == M) ? m->num = 1 : 0;
 	(key == J) ? m->num = 2 : 0;
 	(key == B) ? m->num = 3 : 0;
- 	(key == T) ? m->num = 4 : 0;
- 	(key == S) ? m->num = 5 : 0;
+	(key == T) ? m->num = 4 : 0;
+	(key == D) ? m->num = 5 : 0;
+	(key == L) ? m->num = 6 : 0;
+	(key == I) ? m->num = 7 : 0;
+	(key == S) ? m->num = 8 : 0;
+	(key == LEFT) ? m->offx-- : 0;
+	(key == RIGHT) ? m->offx++ : 0;
+	(key == UP) ? m->offy++ : 0;
+	(key == DOWN) ? m->offy-- : 0;
 	ft_display(m);
 	return (0);
 }
@@ -256,12 +368,8 @@ int		ft_mouse_clic(int button, int x, int y, t_first *m)
 {
 	if (button == 1 || button == 2)
 	{
-		if (m->num == 2 || m->num == 5)
-		{
-			m->movex = x / m->scalex + m->xmin;
-			m->movey = y / m->scaley + m->ymin;
+		if (m->num == 2 || m->num == 5 || m->num == 6 || m->num == 7 || m->num == 8)
 			m->clic = -m->clic;
-		}
 	}
 	if (button == 3 || button == 4 || button == 5)
 	{
@@ -270,15 +378,15 @@ int		ft_mouse_clic(int button, int x, int y, t_first *m)
 		(button == 4) ? m->a = -1 : 0;
 		m->b = 1;
 	}
-	m->clicx = x / m->scalex + m->xmin;
-	m->clicy = y / m->scaley + m->ymin;
+	m->movex = x / m->scalex + m->xmin;
+	m->movey = y / m->scaley + m->ymin;
 	ft_display(m);
 	return (0);
 }
 
 int		ft_mouse_move(int x, int y, t_first *m)
 {
-	if ((m->num == 2 || m->num == 5) && m->clic == 1)
+	if ((m->num == 2 || m->num == 5 || m->num == 6 || m->num == 7 || m->num == 8) && m->clic == 1)
 	{
 		m->movex = x / m->scalex + m->xmin;
 		m->movey = y / m->scaley + m->ymin;
@@ -289,16 +397,20 @@ int		ft_mouse_move(int x, int y, t_first *m)
 
 void	ft_display(t_first *m)
 {
+	ft_translation(m);
 	if (m->b == 1)
 	{
-		ft_zoom(m, m->clicx, m->clicy);
+		ft_zoom(m, m->movex, m->movey);
 		m->b = 0;
 	}
 	(m->num == 1) ? ft_mandel(m) : 0;
 	(m->num == 2) ? ft_julia(m) : 0;
 	(m->num == 3) ? ft_burn(m) : 0;
 	(m->num == 4) ? ft_tricorn(m) : 0;
-	(m->num == 5) ? ft_sofia(m) : 0;
+	(m->num == 5) ? ft_jerome(m) : 0;
+	(m->num == 6) ? ft_lapinou(m) : 0;
+	(m->num == 7) ? ft_illuminati(m) : 0;
+	(m->num == 8) ? ft_sofiya(m) : 0;
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->img_ptr, 0, 0);
 }
 
@@ -318,7 +430,7 @@ void	ft_init(t_first *m)
 	m->height = 450;
 	m->movex = -0.4;
 	m->movey = 0.6;
-	m->val1 = 0;
+	m->val1 = 283;
 	m->clic = 1;
 	m->a = 0;
 	m->b = 0;
@@ -338,7 +450,10 @@ int		main(int ac, char **av)
 	(ft_strcmp(av[1], "-j") == 0) ? m.num = 2 : 0;
 	(ft_strcmp(av[1], "-b") == 0) ? m.num = 3 : 0;
 	(ft_strcmp(av[1], "-t") == 0) ? m.num = 4 : 0;
-	(ft_strcmp(av[1], "-s") == 0) ? m.num = 5 : 0;
+	(ft_strcmp(av[1], "-j") == 0) ? m.num = 5 : 0;
+	(ft_strcmp(av[1], "-l") == 0) ? m.num = 6 : 0;
+	(ft_strcmp(av[1], "-i") == 0) ? m.num = 7 : 0;
+	(ft_strcmp(av[1], "-s") == 0) ? m.num = 8 : 0;
 	ft_display(&m);
 	mlx_hook(m.win_ptr, 2, 0, ft_key, &m);
 	mlx_hook(m.win_ptr, 4, 0, ft_mouse_clic, &m);

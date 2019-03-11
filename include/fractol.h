@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/09 15:02:12 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/11 10:28:12 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,14 @@ typedef struct		s_first
 	float			clicx;
 	float			clicy;
 	int				num;
+	float			xa;
+	float			ya;
+	float			xb;
+	float			yb;
+	int				na;
 	int				clic;
+	int				a;
+	int				b;
 }					t_first;
 
 void				ft_fill_pixel(t_first *m, int x, int y, int n);
@@ -80,5 +87,6 @@ int					ft_mouse_move(int x, int y, t_first *m);
 void				ft_display(t_first *m);
 void				ft_tricorn(t_first *m);
 void				ft_sofia(t_first *m);
+void				ft_zoom(t_first *m, int x, int y);
 
 #endif

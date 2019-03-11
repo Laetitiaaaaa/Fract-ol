@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 12:55:17 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/09 15:04:01 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/11 10:30:32 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,44 @@ void	ft_color(int n, t_first *m)
 	}
 }
 
+void	ft_zoom(t_first *m, int x, int y)
+{
+	if (m->a == 1)
+	{
+		m->xmin += (x - m->xmin) / 10;
+		m->ymin += (y - m->ymin) / 10;
+		m->xmax -= (m->xmax - x) / 10;
+		m->ymax -= (m->ymax - y) / 10;
+		m->nmax += 10;
+	}
+	else if (m->a == -1)
+	{
+		m->xmin -= (x - m->xmin) / 10;
+		m->ymin -= (y - m->ymin) / 10;
+		m->xmax += (m->xmax - x) / 10;
+		m->ymax += (m->ymax - y) / 10;
+		m->nmax -= 10;
+	}
+	else if (m->a == 0)
+	{
+		m->xmin = m->xa;
+		m->ymin = m->ya;
+		m->xmax = m->xb;
+		m->ymax = m->yb;
+		m->nmax = m->na;
+	}
+}
+
 void	ft_mandel(t_first *m)
 {
 	int		n;
 
-	m->nmax = 50;
+//	m->nmax = 50;
 	m->y = 0;
-	m->xmin = -2.1;
-	m->xmax = 0.6;
-	m->ymin = -1.2;
-	m->ymax = 1.2;
+//	m->xmin = -2.1;
+//	m->xmax = 0.6;
+//	m->ymin = -1.2;
+//	m->ymax = 1.2;
 	m->scalex = m->width / (m->xmax - m->xmin);
 	m->scaley = m->height / (m->ymax - m->ymin);
 	while (m->y < m->height)
@@ -96,11 +124,11 @@ void	ft_julia(t_first *m)
 	int		n;
 
 	m->y = 0;
-	m->nmax = 200;
-	m->xmin = -1.6;
-	m->xmax = 1.6;
-	m->ymin = -1.2;
-	m->ymax = 1.2;
+//	m->nmax = 200;
+//	m->xmin = -1.6;
+//	m->xmax = 1.6;
+//	m->ymin = -1.2;
+//	m->ymax = 1.2;
 	m->scalex = m->width / (m->xmax - m->xmin);
 	m->scaley = m->height / (m->ymax - m->ymin);
 	while (m->y < m->height)
@@ -131,12 +159,12 @@ void	ft_tricorn(t_first *m)
 {
 	int		n;
 
-	m->nmax = 50;
+//	m->nmax = 50;
 	m->y = 0;
-	m->xmin = -2.1;
-	m->xmax = 2;
-	m->ymin = -2;
-	m->ymax = 2;
+//	m->xmin = -2.1;
+//	m->xmax = 2;
+//	m->ymin = -2;
+//	m->ymax = 2;
 	m->scalex = m->width / (m->xmax - m->xmin);
 	m->scaley = m->height / (m->ymax - m->ymin);
 	while (m->y < m->height)
@@ -168,11 +196,11 @@ void	ft_burn(t_first *m)
 	int		n;
 
 	m->y = 0;
-	m->nmax = 100;
-	m->xmin = -3;
-	m->xmax = 2;
-	m->ymin = -3;
-	m->ymax = 2;
+//	m->nmax = 100;
+//	m->xmin = -3;
+//	m->xmax = 2;
+//	m->ymin = -3;
+//	m->ymax = 2;
 	m->scalex = m->width / (m->xmax - m->xmin);
 	m->scaley = m->height / (m->ymax - m->ymin);
 	while (m->y < m->height)
@@ -204,11 +232,11 @@ void	ft_sofia(t_first *m)
 	int		n;
 
 	m->y = 0;
-	m->nmax = 100;
-	m->xmin = -3;
-	m->xmax = 2;
-	m->ymin = -3;
-	m->ymax = 2;
+//	m->nmax = 100;
+//	m->xmin = -3;
+//	m->xmax = 2;
+//	m->ymin = -3;
+//	m->ymax = 2;
 	m->scalex = m->width / (m->xmax - m->xmin);
 	m->scaley = m->height / (m->ymax - m->ymin);
 	while (m->y < m->height)
@@ -257,9 +285,21 @@ int		ft_mouse_clic(int button, int x, int y, t_first *m)
 		{
 			m->movex = x / m->scalex + m->xmin;
 			m->movey = y / m->scaley + m->ymin;
+			m->clic = -m->clic;
 		}
-		m->clic = -m->clic;
 	}
+	if (button == 3 || button == 4 || button == 5)
+	{
+		if (button == 3)
+			m->a = 0;
+		if (button == 5)
+			m->a = 1;
+		if (button == 4)
+			m->a = -1;
+		m->b = 1;
+	}
+	m->clicx = x / m->scalex + m->xmin;
+	m->clicy = y / m->scaley + m->ymin;
 	ft_display(m);
 	return (0);
 }
@@ -277,6 +317,11 @@ int		ft_mouse_move(int x, int y, t_first *m)
 
 void	ft_display(t_first *m)
 {
+	if (m->b == 1)
+	{
+		ft_zoom(m, m->clicx, m->clicy);
+		m->b = 0;
+	}
 	if (m->num == 1)
 		ft_mandel(m);
 	if (m->num == 2)
@@ -290,17 +335,34 @@ void	ft_display(t_first *m)
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->img_ptr, 0, 0);
 }
 
+void	ft_init(t_first *m)
+{
+	m->xa = -3;
+	m->xb = 2;
+	m->ya = -3;
+	m->yb = 2;
+	m->xmin = m->xa;
+	m->xmax = m->xb;
+	m->ymin = m->ya;
+	m->ymax = m->yb;
+	m->na = 100;
+	m->nmax = m->na;
+	m->width = 600;
+	m->height = 450;
+	m->movex = -0.4;
+	m->movey = 0.6;
+	m->val1 = 0;
+	m->clic = 1;
+	m->a = 0;
+	m->b = 0;
+}
+
 int		main(int ac, char **av)
 {
 	t_first m;
 
 	ac = 2;
-	m.width = 400;
-	m.height = 300;
-	m.movex = -0.4;
-	m.movey = 0.6;
-	m.val1 = 0;
-	m.clic = 1;
+	ft_init(&m);
 	m.mlx_ptr = mlx_init();
 	m.win_ptr = mlx_new_window(m.mlx_ptr, m.width, m.height, "Fract'ol");
 	m.img_ptr = mlx_new_image(m.mlx_ptr, m.width, m.height);
@@ -311,6 +373,10 @@ int		main(int ac, char **av)
 		m.num = 2;
 	if (ft_strcmp(av[1], "-b") == 0)
 		m.num = 3;
+	if (ft_strcmp(av[1], "-t") == 0)
+		m.num = 4;
+	if (ft_strcmp(av[1], "-s") == 0)
+		m.num = 5;
 	ft_display(&m);
 	mlx_hook(m.win_ptr, 2, 0, ft_key, &m);
 	mlx_hook(m.win_ptr, 4, 0, ft_mouse_clic, &m);

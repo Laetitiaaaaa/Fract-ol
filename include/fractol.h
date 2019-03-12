@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/11 17:12:59 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/12 16:08:19 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,11 @@ typedef struct		s_first
 	int				clic;
 	int				a;
 	int				b;
-	int				offx;
-	int				offy;
+	int				trans;
 }					t_first;
 
 void				ft_fill_pixel(t_first *m, int x, int y, int n);
-void				ft_nb_color(t_first *m, int blue, int green, int red);
+void				ft_nb_color(t_first *m, unsigned char blue, unsigned char green, unsigned char red);
 void				ft_color(int n, t_first *m);
 void				ft_mandel(t_first *m);
 void				ft_julia(t_first *m);
@@ -99,5 +98,6 @@ void				ft_lapinou(t_first *m);
 void				ft_illuminati(t_first *m);
 void				ft_sofiya(t_first *m);
 void				ft_translation(t_first *m);
+int					ft_init_mlx(t_first *m);
 
 #endif

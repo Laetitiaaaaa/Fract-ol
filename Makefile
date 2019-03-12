@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/13 11:39:14 by llejeune          #+#    #+#              #
-#    Updated: 2019/03/12 15:50:38 by llejeune         ###   ########.fr        #
+#    Updated: 2019/03/12 17:29:11 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = fractol
 SRC = display.c \
 	  fractales_move.c \
 	  fractales_fixes.c \
-	  key_mouse.c \
+	  file_utils.c \
+	  initialisation.c \
 	  main.c \
 
 OBJ = $(SRC:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/12 16:08:19 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/12 18:11:24 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
-# define M 46 
+# define M 46
 # define J 38
 # define B 11
 # define T 17
@@ -33,7 +33,6 @@
 # include <mlx.h>
 # include <math.h>
 # include "../libft/libft.h"
-# include <stdio.h>
 
 typedef struct		s_first
 {
@@ -82,7 +81,8 @@ typedef struct		s_first
 }					t_first;
 
 void				ft_fill_pixel(t_first *m, int x, int y, int n);
-void				ft_nb_color(t_first *m, unsigned char blue, unsigned char green, unsigned char red);
+void				ft_nb_color(t_first *m, unsigned char blue,
+		unsigned char green, unsigned char red);
 void				ft_color(int n, t_first *m);
 void				ft_mandel(t_first *m);
 void				ft_julia(t_first *m);
@@ -99,5 +99,7 @@ void				ft_illuminati(t_first *m);
 void				ft_sofiya(t_first *m);
 void				ft_translation(t_first *m);
 int					ft_init_mlx(t_first *m);
+void				ft_init_move(t_first *m);
+void				ft_init_fixe(t_first *m);
 
 #endif

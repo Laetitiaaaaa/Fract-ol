@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/13 11:39:14 by llejeune          #+#    #+#              #
-#    Updated: 2019/03/13 11:54:37 by llejeune         ###   ########.fr        #
+#    Updated: 2019/03/13 13:50:23 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,18 +33,24 @@ FLAG = -Wall -Wextra -Werror
 
 INCLUDES = -I ./include \
 
+LIBFT = ./libft/libft.a
+
 LIBRARIES = -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit \
 			-L ./libft -lft \
 
 all: $(NAME)
 
-$(NAME): $(OBJETS) ./libft/libft.h
-	make -C ./libft
+$(NAME): $(OBJETS)
 	cc $(FLAG) $(INCLUDES) $(OBJETS) $(LIBRARIES) -o $(NAME)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c ./include/fractol.h
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(LIBFT) ./include/fractol.h
 	@mkdir $(OBJ_DIR) 2> /dev/null || true
 	gcc $(FLAG) $(INCLUDES) -o $@ -c $<
+
+$(LIBFT): FORCE
+	make -C ./libft
+
+FORCE:
 
 clean:
 	make fclean -C ./libft

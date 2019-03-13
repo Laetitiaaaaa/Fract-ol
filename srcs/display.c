@@ -6,11 +6,11 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:45:50 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/13 13:32:02 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 14:03:51 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
+#include "fractol.h"
 
 void	ft_fill_pixel(t_first *m, int x, int y, int n)
 {

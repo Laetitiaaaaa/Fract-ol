@@ -6,11 +6,11 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 17:19:57 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/13 13:32:20 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 14:05:01 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
+#include "fractol.h"
 
 void	ft_init(t_first *m)
 {

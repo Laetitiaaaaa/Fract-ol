@@ -6,11 +6,11 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:40:34 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/12 18:09:53 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 14:04:35 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
+#include "fractol.h"
 
 void	ft_mandel(t_first *m)
 {

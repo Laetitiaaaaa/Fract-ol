@@ -6,11 +6,11 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:53:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/13 12:49:39 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 14:04:02 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
+#include "fractol.h"
 
 int		ft_key(int key, t_first *m)
 {

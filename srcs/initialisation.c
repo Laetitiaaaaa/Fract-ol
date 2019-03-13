@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 17:19:57 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/13 11:08:42 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 13:32:20 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ void	ft_init_fixe(t_first *m)
 
 void	ft_free_exit(t_first *m)
 {
-	free(m->win_ptr);
-	free(m->img_ptr);
-	free(m->str);
+	mlx_destroy_image(m->mlx_ptr, m->img_ptr);
+	mlx_destroy_window(m->mlx_ptr, m->win_ptr);
 	exit(0);
 }

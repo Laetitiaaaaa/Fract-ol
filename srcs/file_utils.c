@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:53:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/13 11:10:30 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 12:49:39 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ int		ft_key(int key, t_first *m)
 
 int		ft_mouse_clic(int button, int x, int y, t_first *m)
 {
+	m->clicx = x / m->scalex + m->xmin;
+	m->clicy = y / m->scaley + m->ymin;
 	if (button == 1 || button == 2)
 	{
 		if (m->num == 2 || m->num == 5 || m->num == 6 || m->num == 7
 				|| m->num == 8)
 		{
 			m->clic = -m->clic;
-			m->clicx = x / m->scalex + m->xmin;
-			m->clicy = y / m->scaley + m->ymin;
+			m->movex = m->clicx;
+			m->movey = m->clicy;
 		}
 	}
 	if (button == 3 || button == 4 || button == 5)
@@ -52,8 +54,6 @@ int		ft_mouse_clic(int button, int x, int y, t_first *m)
 		(button == 4) ? m->a = -1 : 0;
 		m->b = 1;
 	}
-	m->movex = m->clicx;
-	m->movey = m->clicy;
 	ft_display(m);
 	return (0);
 }

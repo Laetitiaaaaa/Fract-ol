@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:45:50 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/12 18:12:03 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 13:32:02 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_translation(t_first *m)
 	}
 }
 
-void	ft_zoom(t_first *m, int x, int y)
+void	ft_zoom(t_first *m, float x, float y)
 {
 	m->trans = 0;
 	if (m->a == 1)

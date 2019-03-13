@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/13 11:55:58 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 12:49:18 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int					ft_mouse_move(int x, int y, t_first *m);
 void				ft_display(t_first *m);
 void				ft_tricorn(t_first *m);
 void				ft_jerome(t_first *m);
-void				ft_zoom(t_first *m, int x, int y);
+void				ft_zoom(t_first *m, float x, float y);
 void				ft_lapinou(t_first *m);
 void				ft_illuminati(t_first *m);
 void				ft_sofiya(t_first *m);

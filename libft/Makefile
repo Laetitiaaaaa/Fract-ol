@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 10:29:12 by llejeune          #+#    #+#              #
-#    Updated: 2019/02/07 10:44:08 by llejeune         ###   ########.fr        #
+#    Updated: 2019/03/13 11:53:33 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,7 +142,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ) libft.h
 	ranlib libft.a
 
-%.o: %.c
+%.o: %.c ./libft.h
 	gcc -Wall -Wextra -Werror -o $@ -c $<
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:49:50 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/12 18:05:17 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:10:32 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		main(int ac, char **av)
 		ft_putstr("usage: ./fractol <command>\n");
 	else
 	{
-		(ft_init_mlx(&m) == 0) ? exit(0) : 0;
+		(ft_init_mlx(&m) == 0) ? ft_free_exit(&m) : 0;
 		(ft_strcmp(av[1], "mandelbrot") == 0) ? m.num = 1 : 0;
 		(ft_strcmp(av[1], "julia") == 0) ? m.num = 2 : 0;
 		(ft_strcmp(av[1], "burningship") == 0) ? m.num = 3 : 0;

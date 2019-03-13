@@ -6,7 +6,7 @@
 #    By: llejeune <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/13 11:39:14 by llejeune          #+#    #+#              #
-#    Updated: 2019/03/12 17:29:11 by llejeune         ###   ########.fr        #
+#    Updated: 2019/03/13 11:54:37 by llejeune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ LIBRARIES = -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit \
 
 all: $(NAME)
 
-$(NAME): $(OBJETS)
+$(NAME): $(OBJETS) ./libft/libft.h
 	make -C ./libft
 	cc $(FLAG) $(INCLUDES) $(OBJETS) $(LIBRARIES) -o $(NAME)
 

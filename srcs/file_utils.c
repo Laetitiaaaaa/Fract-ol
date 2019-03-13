@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 15:53:20 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/12 18:13:03 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:10:30 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_key(int key, t_first *m)
 {
-	(key == ESC) ? exit(0) : 0;
+	(key == ESC) ? ft_free_exit(m) : 0;
 	(key == CL) ? m->val1-- : 0;
 	(key == CR) ? m->val1++ : 0;
 	(key == M) ? m->num = 1 : 0;
@@ -89,7 +89,7 @@ void	ft_display(t_first *m)
 	if (m->num == 0)
 	{
 		ft_putstr("usage: ./fractol <command>\n");
-		exit(0);
+		ft_free_exit(m);
 	}
 	mlx_put_image_to_window(m->mlx_ptr, m->win_ptr, m->img_ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 17:19:57 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/12 18:12:55 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:08:42 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	ft_init(t_first *m)
 int		ft_init_mlx(t_first *m)
 {
 	ft_init(m);
+	m->mlx_ptr = NULL;
+	m->win_ptr = NULL;
+	m->img_ptr = NULL;
+	m->str = NULL;
 	if (!(m->mlx_ptr = mlx_init()))
 		return (0);
 	if (!(m->win_ptr = mlx_new_window(m->mlx_ptr, m->width, m->height,
@@ -70,4 +74,12 @@ void	ft_init_fixe(t_first *m)
 	m->ci = m->y / m->scaley + m->ymin;
 	m->zr = 0;
 	m->zi = 0;
+}
+
+void	ft_free_exit(t_first *m)
+{
+	free(m->win_ptr);
+	free(m->img_ptr);
+	free(m->str);
+	exit(0);
 }

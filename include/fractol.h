@@ -6,7 +6,7 @@
 /*   By: llejeune <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 10:08:51 by llejeune          #+#    #+#             */
-/*   Updated: 2019/03/12 18:11:24 by llejeune         ###   ########.fr       */
+/*   Updated: 2019/03/13 11:55:58 by llejeune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void				ft_translation(t_first *m);
 int					ft_init_mlx(t_first *m);
 void				ft_init_move(t_first *m);
 void				ft_init_fixe(t_first *m);
+void				ft_free_exit(t_first *m);
 
 #endif
